@@ -1,0 +1,23 @@
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 5px 5px;
+    width: 120px;
+    height: 42px;
+    font-size: 16px;
+    margin: 5px 0px 5px;
+    background-color: white;
+    border: 1px solid #d5d2d2;
+    text-align: center;
+}
+
+.rounded {
+    border-radius: 40px;
+}
+
+.btn  i {
+    font-size: 20px;
+    font-weight: 700;
+    margin-left: 5px;
+}

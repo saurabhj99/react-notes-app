@@ -1,0 +1,36 @@
+.color-picker-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.color-variant {
+    width: 18px;
+    height: 18px;
+    border: 1px solid #d0cbcb;
+    border-radius: 50%;
+    transition: 0.2s linear all;
+    cursor: pointer;
+}
+
+.color-picker-label {
+    margin-right: auto;
+    margin-bottom: 10px;
+}
+
+.colors {
+    display: flex ;
+    justify-content: space-around; 
+    width: inherit;
+}
+
+.color-active {
+    border: 1px solid black;
+}
+
+.color-variant:hover {
+    border: 1px solid black;
+}
+
