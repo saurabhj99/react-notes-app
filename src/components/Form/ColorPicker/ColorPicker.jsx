@@ -9,6 +9,7 @@ const ColorPicker = ({ currentColor, setCurrentColor, className }) => {
       <div className="colors">
       {colors.map((color) => (
         <div
+          key={color}
           className={`color-variant ${
             currentColor === color ? "color-active" : null
           }`}

@@ -1,12 +1,20 @@
 .header {
     border-bottom: 1px solid #f0f0f0;
-    height: 6vh;
+    display: flex;
+    align-items: center;
+    height: 7vh;
     background-color: #F0EDEE;
     color: #494747;
 }
 
-.header-text {
+.header-text-container {
+    display: flex;
+    align-items: center;
     font-size: 24px;
     font-weight: 500;
     padding: 2px 5px 2px 5px;
+}
+
+.header-text {
+    margin-right: 8px;
 }

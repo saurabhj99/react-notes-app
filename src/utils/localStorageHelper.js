@@ -7,4 +7,8 @@ const getLocalStorage = (key) => {
   return localStorage.getItem(key);
 };
 
-export { setLocalStorage, getLocalStorage };
+const removeLocalStorage = (key) => {
+  localStorage.removeItem(key);
+};
+
+export { setLocalStorage, getLocalStorage, removeLocalStorage };
