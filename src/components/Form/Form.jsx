@@ -8,6 +8,7 @@ const Form = (props) => {
   const [note, setNote] = useState("");
   const [currentColor, setCurrentColor] = useState("");
   const [error, setError] = useState({});
+  const [noteCharLimit] = useState(280);
 
   useEffect(() => {
     if (props.noteToEdit && Object.keys(props.noteToEdit).length) {
@@ -20,12 +21,19 @@ const Form = (props) => {
     }
   }, [props.noteToEdit]);
 
+  const reset = () => {
+    setTitle("");
+    setNote("");
+    setCurrentColor("");
+    props.setNoteToEdit(null);
+  }
+
   const onChangeHandler = (e) => {
     const { value, name } = e.target;
     if (name === "title") {
       setTitle(value);
     }
-    if (name === "note") {
+    if (name === "note" && note.length < noteCharLimit) {
       setNote(value);
     }
   };
@@ -44,9 +52,7 @@ const Form = (props) => {
 
   const onButtonClick = () => {
     let noteObj = {
-      id:
-        props.noteToEdit?.id ||
-        Math.floor(new Date().getTime() / 1000),
+      id: props.noteToEdit?.id || Math.floor(new Date().getTime() / 1000),
       title,
       note,
       color: currentColor,
@@ -64,12 +70,20 @@ const Form = (props) => {
       props.saveNotes(noteObj);
     }
     props.setIsModalOpen(false);
+    reset();
   };
 
+  const onCloseModal = () => {
+    props.setIsModalOpen(false)
+    reset();
+  }
+
   return (
+    <>
+    <div className="form-modal-overlay"></div>
     <div className="form-modal">
       <div className="form-container">
-        <div className="close-icon" onClick={() => props.setIsModalOpen(false)}>
+        <div className="close-icon" onClick={onCloseModal}>
           <i className="ri-close-line"></i>
         </div>
         <div className="note-title-container">
@@ -98,6 +112,9 @@ const Form = (props) => {
             placeholder="Enter your notes here"
             onChange={onChangeHandler}
           />
+          <div className="char-count">
+            {noteCharLimit - note.length} of {noteCharLimit} characters left
+          </div>
         </div>
         <div className="error-msg">
           {error && error["note"] ? error["note"] : null}
@@ -108,6 +125,7 @@ const Form = (props) => {
         </Button>
       </div>
     </div>
+    </>
   );
 };
 
