@@ -1,7 +1,7 @@
 {
   "name": "react-notes-app",
   "version": "1.0.0",
-  "description": "simple react notes keeping applications",
+  "description": "simple react note keeping application",
   "main": "index.js",
   "scripts": {
     "start": "webpack --mode=development && webpack serve",

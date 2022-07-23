@@ -21,6 +21,7 @@ const formatTime = (date) => {
 
   const day = dateObj.getDate();
   const month = months[dateObj.getMonth()];
+  const year = dateObj.getFullYear();
   let time = hours < 12 ? "am" : "pm";
 
   if (minutes < 10) {
@@ -30,7 +31,7 @@ const formatTime = (date) => {
     hours = hours - 12;
   }
 
-  return `${day} ${month} ${hours}:${minutes} ${time}`;
+  return `${day} ${month} ${year} ${hours}:${minutes} ${time}`;
 };
 
 export default formatTime;

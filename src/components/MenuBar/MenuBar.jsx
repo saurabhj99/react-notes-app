@@ -3,7 +3,7 @@ import "./menubar.css";
 
 const Menubar = (props) => {
   const onSearchChange = (e) => {
-    props.setSearchTerm(e.target.value.trim());
+    props.setSearchText(e.target.value.trim());
   };
 
   return (
@@ -12,15 +12,17 @@ const Menubar = (props) => {
         <span> Create </span>
         <i className="ri-pencil-fill"></i>
       </Button>
-      <div className="search-bar">
-        <input
-          type="text"
-          value={props.searchTerm}
-          placeholder="Search by title"
-          onChange={onSearchChange}
-        />
-        <i className="ri-search-line"></i>
-      </div>
+      {props.notes && props.notes.length ? (
+        <div className="search-bar">
+          <input
+            type="text"
+            value={props.searchText}
+            placeholder="Search by title"
+            onChange={onSearchChange}
+          />
+          <i className="ri-search-line"></i>
+        </div>
+      ) : null}
     </div>
   );
 };

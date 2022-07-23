@@ -18,15 +18,27 @@ const App = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [notes, setNotes] = useState([]);
   const [noteToEdit, setNoteToEdit] = useState(null);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
     const storedNotes = getLocalStorage("notes");
+    const demoNote = getLocalStorage("demoNote");
     if (storedNotes && storedNotes.length) {
-      const parsedData = JSON.parse(storedNotes);
-      setNotes(parsedData);
-    } else {
+      setNotes(storedNotes);
+    }
+    if (!demoNote) {
       removeLocalStorage("notes");
+      const firstNote = [
+        {
+          id: Math.floor(new Date().getTime() / 1000),
+          title: "first note",
+          note: "this is my first note",
+          color: "#F6E27F",
+          createdOn: new Date(),
+        },
+      ];
+      setNotes(firstNote);
+      setLocalStorage("demoNote", true);
     }
   }, []);
 
@@ -86,8 +98,9 @@ const App = () => {
       <div>
         <Menubar
           onButtonClick={onButtonClick}
-          searchTerm={searchTerm}
-          setSearchTerm={setSearchTerm}
+          searchText={searchText}
+          setSearchText={setSearchText}
+          notes={notes}
         />
         {isModalOpen && (
           <Form
@@ -101,7 +114,7 @@ const App = () => {
         {notes && notes.length ? (
           <div className="notes-container">
             {notes
-              .filter((note) => note.title.match(new RegExp(searchTerm, "i")))
+              .filter((note) => note.title.match(new RegExp(searchText, "i")))
               .map(({ id, title, note, color, createdOn }, index) => (
                 <Note
                   key={index}
@@ -114,7 +127,9 @@ const App = () => {
               ))}
           </div>
         ) : (
-          <div>You don't have any notes yet</div>
+          <div className="empty-notes-msg-container">
+            <div className="empty-notes-msg">You don't have any notes.</div>
+          </div>
         )}
       </div>
     </div>
